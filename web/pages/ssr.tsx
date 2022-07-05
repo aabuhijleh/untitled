@@ -1,9 +1,12 @@
 import type { NextPage } from "next";
 import { Hello } from "@/components/Hello";
 import styled from "styled-components";
-import hello from "@/graphql/queries/hello.graphql";
 import { addApolloState, initializeApollo } from "@/client";
-import { HelloQuery, HelloQueryVariables } from "@/generated/graphql";
+import {
+  HelloDocument,
+  HelloQuery,
+  HelloQueryVariables,
+} from "@/generated/graphql";
 
 const HomeSSR: NextPage = () => {
   return (
@@ -24,7 +27,7 @@ export const getServerSideProps = async () => {
   const apolloClient = initializeApollo();
 
   await apolloClient.query<HelloQuery, HelloQueryVariables>({
-    query: hello,
+    query: HelloDocument,
   });
 
   return addApolloState(apolloClient, {
