@@ -1,5 +1,11 @@
 import { useMemo } from "react";
-import { ApolloClient, HttpLink, InMemoryCache, from } from "@apollo/client";
+import {
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  from,
+  NormalizedCacheObject,
+} from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { concatPagination } from "@apollo/client/utilities";
 import merge from "deepmerge";
@@ -7,16 +13,16 @@ import isEqual from "lodash.isequal";
 
 export const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__";
 
-let apolloClient: any;
+let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) =>
-      console.log(
+      console.error(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
       )
     );
-  if (networkError) console.log(`[Network error]: ${networkError}`);
+  if (networkError) console.error(`[Network error]: ${networkError}`);
 });
 
 const httpLink = new HttpLink({
@@ -71,9 +77,9 @@ export function initializeApollo(initialState = null) {
   return _apolloClient;
 }
 
-export function addApolloState(client: any, pageProps: any) {
+export function addApolloState(client: typeof apolloClient, pageProps: any) {
   if (pageProps?.props) {
-    pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract();
+    pageProps.props[APOLLO_STATE_PROP_NAME] = client?.cache.extract();
   }
 
   return pageProps;
