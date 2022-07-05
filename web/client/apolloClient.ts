@@ -24,6 +24,12 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.error(`[Network error]: ${networkError}`);
 });
 
+if (!process.env.NEXT_PUBLIC_SERVER_URL) {
+  throw new Error(
+    "NEXT_PUBLIC_SERVER_URL is missing. Add it to the '.env.local' file"
+  );
+}
+
 const httpLink = new HttpLink({
   uri: process.env.NEXT_PUBLIC_SERVER_URL, // Server URL (must be absolute)
   credentials: "same-origin", // Additional fetch() options like `credentials` or `headers`
