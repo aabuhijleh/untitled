@@ -1,9 +1,8 @@
 import type { NextPage } from "next";
 import { Hello } from "@/components/Hello";
 import styled from "styled-components";
-import gql from "graphql-tag";
 
-const Home: NextPage<{ hello: string }> = ({ hello }) => {
+const Home: NextPage = () => {
   return (
     <Wrapper>
       <Hello />
