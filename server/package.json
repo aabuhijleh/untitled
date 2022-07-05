@@ -10,8 +10,6 @@
     "start": "node ."
   },
   "dependencies": {
-    "-": "0.0.1",
-    "D": "^1.0.0",
     "apollo-server": "^3.9.0",
     "class-validator": "^0.13.2",
     "dotenv-safe": "^8.2.0",
