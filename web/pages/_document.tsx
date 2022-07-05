@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="ar" dir="rtl">
+      <Html lang="en">
         <Head>
           <link
             href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap"
