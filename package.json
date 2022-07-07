@@ -1,0 +1,9 @@
+{
+  "name": "untitled",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start:server": "pnpm --filter server dev",
+    "start:web": "pnpm --filter web dev"
+  }
+}
